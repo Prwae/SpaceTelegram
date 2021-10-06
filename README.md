@@ -7,8 +7,8 @@
 Для начала надо создать .env файл в директории программы.
 Затем, взять API ключи и поместить их в него таким способом (ссылка - место откуда надо брать токен):
 ```
-1. NASA_TOKEN=https://api.nasa.gov (раздел "Get Api Key")
-2. TELEGRAM_TOKEN=https://telegram.me/BotFather (Создать Телеграм бота, гайд - https://way23.ru/регистрация-бота-в-telegram.html)
+NASA_TOKEN=https://api.nasa.gov (раздел "Get Api Key")
+TELEGRAM_TOKEN=https://telegram.me/BotFather (Создать Телеграм бота, гайд - https://way23.ru/регистрация-бота-в-telegram.html)
 ```
 
 Python3 должен быть уже установлен. 
