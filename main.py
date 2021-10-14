@@ -1,12 +1,11 @@
 from urllib.parse import urlsplit
 import os
+import time
+from random import *
 
 import requests
+import telegram
 from dotenv import load_dotenv
-
-
-load_dotenv()
-NASA_TOKEN = os.environ["NASA_TOKEN"]
 
 
 def image_download(url, way):
@@ -39,7 +38,8 @@ def get_apod(count, apikey):
     json_response = response.json()
 
     for id, apod in enumerate(json_response):
-        image_download(apod["url"], f"images/apod{id}.jpeg")
+        print(apod["url"])
+        image_download(apod["url"], f"images/apod{id}{get_file_extension(apod['url'])}")
 
 
 def get_epic(apikey):
@@ -53,8 +53,23 @@ def get_epic(apikey):
         image_download(url, f"images/epic{id}.jpeg")
 
 
-if __name__ == "__main__":
-    fetch_spacex_last_launch()
-    get_apod(30, NASA_TOKEN)
-    get_epic(NASA_TOKEN)
+def telegram_post():
+    while True:
+        image_choice = choice(os.listdir("images"))
+        with open(f"images/{image_choice}", "rb") as file:
+            image = file.read()
+        bot.send_photo(chat_id=chat_id, photo=image)
+        time.sleep(86400)
 
+
+if __name__ == "__main__":
+    load_dotenv()
+    nasa_token = os.environ["NASA_TOKEN"]
+    telegram_token = os.environ["TELEGRAM_TOKEN"]
+    chat_id = os.environ["TELEGRAM_CHANNEL"]
+    bot = telegram.Bot(token=telegram_token)
+
+    fetch_spacex_last_launch()
+    get_apod(30, nasa_token)
+    get_epic(nasa_token)
+    telegram_post()
