@@ -12,9 +12,10 @@ TELEGRAM_TOKEN=Токен Телеграмм бота (https://telegram.me/BotFa
 TELEGRAM_CHANNEL=Телеграмм канал
 ```
 Где достать:
-Токен Nasa - https://api.nasa.gov (раздел "Get Api Key")
-Токен Телеграмм бота - https://telegram.me/BotFather (Создать Телеграм бота, гайд - https://way23.ru/регистрация-бота-в-telegram.html)
-Телеграмм канал - https://smmplanner.com/blog/otlozhennyj-posting-v-telegram/ (Привязать бота; пункты "Создаем свой Телеграм-канал", "Добавляем бота в канал (или в чат)")
+
+1. Токен Nasa - https://api.nasa.gov (раздел "Get Api Key")
+2. Токен Телеграмм бота - https://telegram.me/BotFather (Создать Телеграм бота, гайд - https://way23.ru/регистрация-бота-в-telegram.html)
+3. Телеграмм канал - https://smmplanner.com/blog/otlozhennyj-posting-v-telegram/ (Привязать бота; пункты "Создаем свой Телеграм-канал", "Добавляем бота в канал (или в чат)")
 
 Python3 должен быть уже установлен. 
 Затем используйте `pip` (или `pip3`, если есть конфликт с Python2) для установки зависимостей:
