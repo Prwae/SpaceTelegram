@@ -8,7 +8,7 @@
 Затем, взять API ключи и поместить их в него таким способом (ссылка - место откуда надо брать токен):
 ```
 NASA_TOKEN=Токен Nasa
-TELEGRAM_TOKEN=Токен Телеграмм бота (https://telegram.me/BotFather (Создать Телеграм бота, гайд - https://way23.ru/регистрация-бота-в-telegram.html))
+TELEGRAM_TOKEN=Токен Телеграмм бота
 TELEGRAM_CHANNEL=Телеграмм канал
 ```
 Где достать:
