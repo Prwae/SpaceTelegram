@@ -29,8 +29,13 @@ def fetch_spacex_last_launch():
 
 
 def get_apod(count, apikey):
+    payload = {
+        apikey: apikey,
+        count: count
+    }
+
     response = requests.get(
-        f"https://api.nasa.gov/planetary/apod?api_key={apikey}&count={count}")
+        f"https://api.nasa.gov/planetary/apod", params=payload)
     response.raise_for_status()
 
     for id, apod in enumerate(response.json()):
@@ -38,7 +43,11 @@ def get_apod(count, apikey):
 
 
 def get_epic(apikey):
-    response = requests.get(f"https://api.nasa.gov/EPIC/api/natural?api_key={apikey}")
+    payload = {
+        apikey: apikey
+    }
+
+    response = requests.get(f"https://api.nasa.gov/EPIC/api/natural", params=payload)
     response.raise_for_status()
 
     for id, epic in enumerate(response.json()):
