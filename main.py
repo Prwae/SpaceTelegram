@@ -1,7 +1,7 @@
 from urllib.parse import urlsplit
 import os
 import time
-from random import *
+import random
 
 import requests
 import telegram
@@ -55,7 +55,7 @@ def get_epic(apikey):
 
 def telegram_post():
     while True:
-        image_choice = choice(os.listdir("images"))
+        image_choice = random.choice(os.listdir("images"))
         with open(f"images/{image_choice}", "rb") as file:
             image = file.read()
         bot.send_photo(chat_id=chat_id, photo=image)
