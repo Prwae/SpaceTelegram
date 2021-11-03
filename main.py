@@ -38,7 +38,6 @@ def get_apod(count, apikey):
     response.raise_for_status()
 
     for id, apod in enumerate(response.json()):
-        print(apod["url"])
         download_image(apod["url"], f"images/apod{id}{get_file_extension(apod['url'])}")
 
 
