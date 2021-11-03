@@ -30,8 +30,8 @@ def fetch_spacex_last_launch():
 
 def get_apod(count, apikey):
     payload = {
-        apikey: apikey,
-        count: count
+        "apikey": apikey,
+        "count": count
     }
 
     response = requests.get(
@@ -44,7 +44,7 @@ def get_apod(count, apikey):
 
 def get_epic(apikey):
     payload = {
-        apikey: apikey
+        "apikey": apikey
     }
 
     response = requests.get(f"https://api.nasa.gov/EPIC/api/natural", params=payload)
