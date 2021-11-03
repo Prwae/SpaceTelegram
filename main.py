@@ -51,7 +51,7 @@ def get_epic(apikey):
     response.raise_for_status()
 
     for id, epic in enumerate(response.json()):
-        url = f"https://api.nasa.gov/EPIC/archive/natural/{epic['date'][0:10].replace('-', '/')}/png/{epic['image']}.png?api_key=EJBgaOeDsQVkfNFTgcPDX3kyrddUCkl56CH4qOqh"
+        url = f"https://api.nasa.gov/EPIC/archive/natural/{epic['date'][0:10].replace('-', '/')}/png/{epic['image']}.png?api_key={apikey}"
         download_image(url, f"images/epic{id}.jpeg")
 
 
