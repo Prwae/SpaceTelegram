@@ -59,8 +59,7 @@ def post_images_to_telegram():
     while True:
         image_choice = random.choice(os.listdir("images"))
         with open(f"images/{image_choice}", "rb") as file:
-            image = file.read()
-        bot.send_photo(chat_id=chat_id, photo=image)
+            bot.send_photo(chat_id=chat_id, photo=file)
         time.sleep(86400)
 
 
