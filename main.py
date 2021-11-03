@@ -8,7 +8,7 @@ import telegram
 from dotenv import load_dotenv
 
 
-def image_download(url, way):
+def download_image(url, way):
     response = requests.get(url)
     response.raise_for_status()
 
@@ -25,7 +25,7 @@ def fetch_spacex_last_launch():
     response.raise_for_status()
 
     for id, image in enumerate(response.json()["links"]["flickr"]["original"]):
-        image_download(image, f"images/spacex{id}.jpeg")
+        download_image(image, f"images/spacex{id}.jpeg")
 
 
 def get_apod(count, apikey):
@@ -35,7 +35,7 @@ def get_apod(count, apikey):
 
     for id, apod in enumerate(response.json()):
         print(apod["url"])
-        image_download(apod["url"], f"images/apod{id}{get_file_extension(apod['url'])}")
+        download_image(apod["url"], f"images/apod{id}{get_file_extension(apod['url'])}")
 
 
 def get_epic(apikey):
@@ -44,10 +44,10 @@ def get_epic(apikey):
 
     for id, epic in enumerate(response.json()):
         url = f"https://api.nasa.gov/EPIC/archive/natural/{epic['date'][0:10].replace('-', '/')}/png/{epic['image']}.png?api_key=EJBgaOeDsQVkfNFTgcPDX3kyrddUCkl56CH4qOqh"
-        image_download(url, f"images/epic{id}.jpeg")
+        download_image(url, f"images/epic{id}.jpeg")
 
 
-def telegram_post():
+def post_images_to_telegram():
     while True:
         image_choice = random.choice(os.listdir("images"))
         with open(f"images/{image_choice}", "rb") as file:
@@ -66,4 +66,4 @@ if __name__ == "__main__":
     fetch_spacex_last_launch()
     get_apod(30, nasa_token)
     get_epic(nasa_token)
-    telegram_post()
+    post_images_to_telegram()
