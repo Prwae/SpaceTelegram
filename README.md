@@ -25,7 +25,10 @@ pip install -r requirements.txt
 
 ### Как запустить
 
-Запустить `main.py`
+Запуск скрипта через консоль:
+```
+python main.py
+```
 
 Все ;)
 
