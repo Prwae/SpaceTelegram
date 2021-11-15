@@ -33,7 +33,7 @@ def get_apod(count, apikey, directory):
         "apikey": apikey,
         "count": count
     }
-    print(f"https://api.nasa.gov/planetary/apod?api_key={apikey}&count={count}")
+    
     response = requests.get(f"https://api.nasa.gov/planetary/apod?api_key={apikey}&count={count}")
     response.raise_for_status()
 
