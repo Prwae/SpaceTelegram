@@ -2,14 +2,14 @@ from urllib.parse import urlsplit
 import os
 import time
 import random
-
+import pprint
 import requests
 import telegram
 from dotenv import load_dotenv
 
 
-def download_image(url, way):
-    response = requests.get(url)
+def download_image(url, way, params=None):
+    response = requests.get(url, params=params)
     response.raise_for_status()
 
     with open(way, "wb") as file:
@@ -30,11 +30,11 @@ def fetch_spacex_last_launch(directory):
 
 def get_apod(count, apikey, directory):
     payload = {
-        "apikey": apikey,
+        "api_key": apikey,
         "count": count
     }
-    
-    response = requests.get(f"https://api.nasa.gov/planetary/apod?api_key={apikey}&count={count}")
+
+    response = requests.get(f"https://api.nasa.gov/planetary/apod", params=payload)
     response.raise_for_status()
 
     for img_number, apod in enumerate(response.json()):
@@ -43,15 +43,15 @@ def get_apod(count, apikey, directory):
 
 def get_epic(apikey, directory):
     payload = {
-        "apikey": apikey
+        "api_key": apikey
     }
 
     response = requests.get(f"https://api.nasa.gov/EPIC/api/natural", params=payload)
     response.raise_for_status()
 
     for img_id, epic in enumerate(response.json()):
-        url = f"https://api.nasa.gov/EPIC/archive/natural/{epic['date'][0:10].replace('-', '/')}/png/{epic['image']}.png?api_key={apikey}"
-        download_image(url, f"{directory}epic{img_id}.jpeg")
+        url = (f"https://api.nasa.gov/EPIC/archive/natural/{epic['date'][0:10].replace('-', '/')}/png/{epic['image']}.png")
+        download_image(url, f"{directory}epic{img_id}.jpeg", payload)
 
 
 def post_images_to_telegram(directory):
