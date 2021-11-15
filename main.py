@@ -24,8 +24,8 @@ def fetch_spacex_last_launch(directory):
     response = requests.get("https://api.spacexdata.com/v4/launches/latest")
     response.raise_for_status()
 
-    for id, image in enumerate(response.json()["links"]["flickr"]["original"]):
-        download_image(image, f"{directory}spacex{id}.jpeg")
+    for img_number, image in enumerate(response.json()["links"]["flickr"]["original"]):
+        download_image(image, f"{directory}spacex{img_number}.jpeg")
 
 
 def get_apod(count, apikey, directory):
@@ -37,8 +37,8 @@ def get_apod(count, apikey, directory):
     response = requests.get(f"https://api.nasa.gov/planetary/apod?api_key={apikey}&count={count}")
     response.raise_for_status()
 
-    for id, apod in enumerate(response.json()):
-        download_image(apod["url"], f"{directory}apod{id}{get_file_extension(apod['url'])}")
+    for img_number, apod in enumerate(response.json()):
+        download_image(apod["url"], f"{directory}apod{img_number}{get_file_extension(apod['url'])}")
 
 
 def get_epic(apikey, directory):
@@ -49,9 +49,9 @@ def get_epic(apikey, directory):
     response = requests.get(f"https://api.nasa.gov/EPIC/api/natural", params=payload)
     response.raise_for_status()
 
-    for id, epic in enumerate(response.json()):
+    for img_id, epic in enumerate(response.json()):
         url = f"https://api.nasa.gov/EPIC/archive/natural/{epic['date'][0:10].replace('-', '/')}/png/{epic['image']}.png?api_key={apikey}"
-        download_image(url, f"{directory}epic{id}.jpeg")
+        download_image(url, f"{directory}epic{img_id}.jpeg")
 
 
 def post_images_to_telegram(directory):
