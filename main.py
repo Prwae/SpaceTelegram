@@ -1,4 +1,4 @@
-from urllib.parse import urlsplit
+from urllib.parse import urlsplit, unquote
 import os
 import time
 import random
@@ -17,7 +17,7 @@ def download_image(url, way, params=None):
 
 
 def get_file_extension(link):
-    return os.path.splitext(urlsplit(link)[2])[1]
+    return os.path.splitext(urlsplit(unquote(link))[2])[1]
 
 
 def fetch_spacex_last_launch(directory):
