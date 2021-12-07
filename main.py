@@ -6,6 +6,11 @@ import pprint
 import requests
 import telegram
 from dotenv import load_dotenv
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('image_send_periodicity', help='Периодичность отправки фото')
+image_send_periodicity = parser.parse_args()
 
 
 def download_image(url, way, params=None):
@@ -59,7 +64,7 @@ def post_images_to_telegram(directory):
         image_choice = random.choice(os.listdir("images"))
         with open(f"{directory}{image_choice}", "rb") as file:
             bot.send_photo(chat_id=chat_id, photo=file)
-        time.sleep(86400)
+        time.sleep(int(image_send_periodicity.image_send_periodicity))
 
 
 if __name__ == "__main__":
