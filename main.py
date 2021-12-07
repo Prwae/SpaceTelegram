@@ -2,7 +2,6 @@ from urllib.parse import urlsplit, unquote
 import os
 import time
 import random
-import pprint
 import requests
 import telegram
 from dotenv import load_dotenv
