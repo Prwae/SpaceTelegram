@@ -58,12 +58,12 @@ def get_epic(apikey, directory):
         download_image(url, f"{directory}epic{img_id}.jpeg", payload)
 
 
-def post_images_to_telegram(directory):
+def post_images_to_telegram(directory, chat_id, image_send_peridiocity):
     while True:
         image_choice = random.choice(os.listdir("images"))
         with open(f"{directory}{image_choice}", "rb") as file:
             bot.send_photo(chat_id=chat_id, photo=file)
-        time.sleep(int(image_send_periodicity.image_send_periodicity))
+        time.sleep(image_send_peridiocity)
 
 
 if __name__ == "__main__":
@@ -76,4 +76,4 @@ if __name__ == "__main__":
     fetch_spacex_last_launch("images/")
     get_apod(30, nasa_token, "images/")
     get_epic(nasa_token, "images/")
-    post_images_to_telegram("images/")
+    post_images_to_telegram("images/", chat_id, image_send_periodicity.image_send_periodicity)
