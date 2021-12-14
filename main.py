@@ -28,7 +28,7 @@ def fetch_spacex_last_launch(directory):
     response = requests.get("https://api.spacexdata.com/v4/launches/latest")
     response.raise_for_status()
 
-    for img_number, image in enumerate(response.json()["links"]["flickr"]["original"]):
+    for img_number, image in enumerate(response.json()["links"]["flickr_images"]):
         download_image(image, f"{directory}spacex{img_number}.jpeg")
 
 
@@ -67,6 +67,7 @@ def post_images_to_telegram(directory, chat_id, image_send_peridiocity):
 
 
 if __name__ == "__main__":
+    os.makedirs("images", exist_ok=True)
     load_dotenv()
     nasa_token = os.environ["NASA_TOKEN"]
     telegram_token = os.environ["TELEGRAM_TOKEN"]
@@ -76,4 +77,4 @@ if __name__ == "__main__":
     fetch_spacex_last_launch("images/")
     get_apod(30, nasa_token, "images/")
     get_epic(nasa_token, "images/")
-    post_images_to_telegram("images/", chat_id, image_send_periodicity.image_send_periodicity)
+    post_images_to_telegram("images/", chat_id, (image_send_periodicity.image_send_periodicity))
