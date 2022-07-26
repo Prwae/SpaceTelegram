@@ -7,10 +7,6 @@ import telegram
 from dotenv import load_dotenv
 import argparse
 
-parser = argparse.ArgumentParser()
-parser.add_argument('image_send_periodicity', help='Периодичность отправки фото')
-image_send_periodicity = parser.parse_args()
-
 
 def download_image(url, way, params=None):
     response = requests.get(url, params=params)
@@ -67,6 +63,10 @@ def post_images_to_telegram(directory, chat_id, image_send_peridiocity):
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('image_send_periodicity', help='Периодичность отправки фото')
+    image_send_periodicity = parser.parse_args()
+
     os.makedirs("images", exist_ok=True)
     load_dotenv()
     nasa_token = os.environ["NASA_TOKEN"]
