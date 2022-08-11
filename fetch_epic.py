@@ -16,7 +16,6 @@ def fetch_epic(apikey, directory):
     for img_id, epic in enumerate(response.json()):
         datetime_date = datetime.strptime(epic["date"], "%Y-%m-%d %H:%M:%S")
         formatted_date = datetime_date.strftime("%Y/%m/%d")
-        print(formatted_date)
         url = f"https://api.nasa.gov/EPIC/archive/natural/{formatted_date}/png/{epic['image']}.png"
         download_image(url, f"{directory}epic{img_id}.jpeg", payload)
 

@@ -11,7 +11,6 @@ def fetch_spacex_last_launch(directory, launch_number="latest"):
     else:
         response = requests.get(f"https://api.spacexdata.com/v3/launches/{launch_number}")
     response.raise_for_status()
-    pprint(response.json())
     for img_number, image in enumerate(response.json()["links"]["flickr_images"]):
         download_image(image, f"{directory}spacex{img_number}.jpeg")
 
