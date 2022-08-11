@@ -1,7 +1,7 @@
+import logging
 import os
 import time
 import random
-import requests
 import telegram
 from dotenv import load_dotenv
 import argparse
@@ -10,9 +10,13 @@ import argparse
 def post_images_to_telegram(directory, chat_id, image_send_peridiocity):
     while True:
         image_choice = random.choice(os.listdir("images"))
-        with open(os.path.join(directory, image_choice), "rb") as file:
-            bot.send_photo(chat_id=chat_id, photo=file)
-        time.sleep(image_send_peridiocity)
+        try:
+            with open(os.path.join(directory, image_choice), "rb") as file:
+                bot.send_photo(chat_id=chat_id, photo=file)
+            time.sleep(image_send_peridiocity)
+        except telegram.error.NetworkError:
+            logging.warning("Не удалось подключиться к серверу. Проверьте подключение к интернету.")
+            time.sleep(5)
 
 
 if __name__ == "__main__":
