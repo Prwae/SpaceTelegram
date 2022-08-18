@@ -18,9 +18,9 @@ def fetch_apod(apikey, directory):
 
     response = requests.get(f"https://api.nasa.gov/planetary/apod", params=payload)
     response.raise_for_status()
-
     for img_number, apod in enumerate(response.json()):
-        download_image(apod["url"], os.path.join(directory, f"apod{img_number}{get_file_extension(apod['url'])}"))
+        if apod["media_type"] == "image":
+            download_image(apod["url"], os.path.join(directory, f"apod{img_number}{get_file_extension(apod['url'])}"), params=payload)
 
 
 if __name__ == "__main__":
