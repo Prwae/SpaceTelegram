@@ -17,7 +17,7 @@ def fetch_epic(apikey, directory):
         datetime_date = datetime.strptime(epic["date"], "%Y-%m-%d %H:%M:%S")
         formatted_date = datetime_date.strftime("%Y/%m/%d")
         url = f"https://api.nasa.gov/EPIC/archive/natural/{formatted_date}/png/{epic['image']}.png"
-        download_image(url, f"{directory}epic{img_id}.jpeg", payload)
+        download_image(url, os.path.join(directory, f"epic{img_id}"))
 
 
 if __name__ == "__main__":
@@ -26,4 +26,4 @@ if __name__ == "__main__":
     load_dotenv()
     nasa_token = os.environ["NASA_TOKEN"]
 
-    fetch_epic(nasa_token, "images/")
+    fetch_epic(nasa_token, "images")

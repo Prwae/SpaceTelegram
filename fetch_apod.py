@@ -20,7 +20,7 @@ def fetch_apod(apikey, directory):
     response.raise_for_status()
 
     for img_number, apod in enumerate(response.json()):
-        download_image(apod["url"], f"{directory}apod{img_number}{get_file_extension(apod['url'])}")
+        download_image(apod["url"], os.path.join(directory, f"apod{img_number}{get_file_extension(apod['url'])}"))
 
 
 if __name__ == "__main__":
@@ -29,4 +29,4 @@ if __name__ == "__main__":
     load_dotenv()
     nasa_token = os.environ["NASA_TOKEN"]
 
-    fetch_apod(nasa_token, "images/")
+    fetch_apod(nasa_token, "images")

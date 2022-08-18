@@ -12,7 +12,7 @@ def fetch_spacex_last_launch(directory, launch_number="latest"):
         response = requests.get(f"https://api.spacexdata.com/v3/launches/{launch_number}")
     response.raise_for_status()
     for img_number, image in enumerate(response.json()["links"]["flickr_images"]):
-        download_image(image, f"{directory}spacex{img_number}.jpeg")
+        download_image(image, os.path.join(directory, f"spacex{img_number}"))
 
 
 if __name__ == "__main__":
@@ -23,6 +23,6 @@ if __name__ == "__main__":
     os.makedirs("images", exist_ok=True)
 
     if launch_number:
-        fetch_spacex_last_launch("images/", launch_number)
+        fetch_spacex_last_launch("images", launch_number)
     else:
-        fetch_spacex_last_launch("images/")
+        fetch_spacex_last_launch("images")
