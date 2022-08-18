@@ -6,12 +6,16 @@ import os
 
 
 def fetch_spacex_last_launch(directory, launch_number="latest"):
+    payload = {
+        "id": launch_number
+    }
+
     if launch_number == "latest":
-        response = requests.get("https://api.spacexdata.com/v4/launches/latest")
+        response = requests.get("https://api.spacexdata.com/v5/launches/latest")
     else:
-        response = requests.get(f"https://api.spacexdata.com/v3/launches/{launch_number}")
+        response = requests.get(f"https://api.spacexdata.com/v5/launches/:id", params=payload)
     response.raise_for_status()
-    for img_number, image in enumerate(response.json()["links"]["flickr_images"]):
+    for img_number, image in enumerate(response.json()["flickr"]["original"]):
         download_image(image, os.path.join(directory, f"spacex{img_number}"))
 
 
