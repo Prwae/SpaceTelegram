@@ -13,11 +13,11 @@ def fetch_epic(apikey, directory):
     response = requests.get(f"https://api.nasa.gov/EPIC/api/natural", params=payload)
     response.raise_for_status()
 
-    for img_id, epic in enumerate(response.json()):
+    for num, epic in enumerate(response.json()):
         datetime_date = datetime.strptime(epic["date"], "%Y-%m-%d %H:%M:%S")
         formatted_date = datetime_date.strftime("%Y/%m/%d")
         url = f"https://api.nasa.gov/EPIC/archive/natural/{formatted_date}/png/{epic['image']}.png"
-        download_image(url, os.path.join(directory, f"epic{img_id}"))
+        download_image(url, os.path.join(directory, f"epic{num}"), params=payload)
 
 
 if __name__ == "__main__":
