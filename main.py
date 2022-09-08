@@ -21,7 +21,7 @@ def post_images_to_telegram(directory, chat_id, image_send_peridiocity):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('image_send_periodicity', help='Периодичность отправки фото', type=int)
+    parser.add_argument('--image_send_periodicity', help='Периодичность отправки фото', type=int, default=14400)
     image_send_periodicity = parser.parse_args().image_send_periodicity
 
     os.makedirs("images", exist_ok=True)
