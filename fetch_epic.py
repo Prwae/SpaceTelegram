@@ -1,6 +1,6 @@
 import requests
 from datetime import datetime
-from download_image import download_image
+from general_functions import download_image, get_file_extension
 import os
 from dotenv import load_dotenv
 
@@ -17,7 +17,7 @@ def fetch_epic(apikey, directory):
         datetime_date = datetime.strptime(epic["date"], "%Y-%m-%d %H:%M:%S")
         formatted_date = datetime_date.strftime("%Y/%m/%d")
         url = f"https://api.nasa.gov/EPIC/archive/natural/{formatted_date}/png/{epic['image']}.png"
-        download_image(url, os.path.join(directory, f"epic{num}"), params=payload)
+        download_image(url, os.path.join(directory, f"epic{num}{get_file_extension(url)}"), params=payload)
 
 
 if __name__ == "__main__":

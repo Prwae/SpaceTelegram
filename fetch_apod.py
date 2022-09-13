@@ -1,12 +1,7 @@
 import requests
-from download_image import download_image
+from general_functions import download_image, get_file_extension
 import os
 from dotenv import load_dotenv
-from urllib.parse import urlparse
-
-
-def get_file_extension(link):
-    return os.path.splitext(urlparse(link).path)[1]
 
 
 def fetch_apod(apikey, directory):
