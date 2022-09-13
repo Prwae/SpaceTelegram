@@ -1,5 +1,4 @@
 import requests
-from pprint import pprint
 from general_functions import download_image, get_file_extension
 import argparse
 import os
@@ -15,11 +14,8 @@ def fetch_spacex_last_launch(directory, launch_id):
     else:
         response = requests.get(f"https://api.spacexdata.com/v5/launches/{launch_id}")
     response.raise_for_status()
-    pprint(response.json())
-    print(type(response.json()))
 
     for num, image in enumerate(response.json()["links"]["flickr"]["original"]):
-        print(image, "----", os.path.join(directory, f"spacex{num}.jpg"))
         download_image(image, os.path.join(directory, f"spacex{num}{get_file_extension(image)}"))
 
 
