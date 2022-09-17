@@ -5,11 +5,7 @@ import os
 
 
 def fetch_spacex_last_launch(directory, launch_id):
-
-    if launch_id == "latest":
-        response = requests.get("https://api.spacexdata.com/v5/launches/latest")
-    else:
-        response = requests.get(f"https://api.spacexdata.com/v5/launches/{launch_id}")
+    response = requests.get(f"https://api.spacexdata.com/v5/launches/{launch_id}")
     response.raise_for_status()
 
     for num, image in enumerate(response.json()["links"]["flickr"]["original"]):
@@ -23,7 +19,5 @@ if __name__ == "__main__":
 
     os.makedirs("images", exist_ok=True)
 
-    if launch_id:
-        fetch_spacex_last_launch("images", launch_id)
-    else:
-        fetch_spacex_last_launch("images")
+    fetch_spacex_last_launch("images", launch_id)
+
