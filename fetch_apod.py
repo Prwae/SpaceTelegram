@@ -2,10 +2,10 @@ import requests
 from general_functions import download_image, get_file_extension
 import os
 from dotenv import load_dotenv
+import argparse
 
 
-def fetch_apod(apikey, directory):
-    count = 30
+def fetch_apod(apikey, directory, count):
     payload = {
         "api_key": apikey,
         "count": count
@@ -19,9 +19,14 @@ def fetch_apod(apikey, directory):
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--image_count', help='Количество фотографий', type=int, default=30)
+    image_count = parser.parse_args().image_count
+
     os.makedirs("images", exist_ok=True)
 
     load_dotenv()
     nasa_token = os.environ["NASA_TOKEN"]
 
-    fetch_apod(nasa_token, "images")
+    fetch_apod(nasa_token, "images", image_count)
+
