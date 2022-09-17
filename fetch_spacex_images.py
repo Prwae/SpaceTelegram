@@ -5,9 +5,6 @@ import os
 
 
 def fetch_spacex_last_launch(directory, launch_id):
-    payload = {
-        "id": launch_id
-    }
 
     if launch_id == "latest":
         response = requests.get("https://api.spacexdata.com/v5/launches/latest")
